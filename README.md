@@ -5,7 +5,9 @@
 
  In the case I continue working on this, I plan on adding more interesting enemies, powerups, and improve the art and audio.
 
- The biggest things I learned from doing this are the the importance of audio, the importance of time management during a game jam, andhow to use Godot and GDScript.
+ The biggest things I learned from doing this are the the importance of audio, the importance of time management during a game jam, and how to use Godot, GDScript, and Itch.io.
+
+Itch.io link: https://mysticspirit.itch.io/bouncing-bullets-in-space
 
  Screenshots: <br>
 
