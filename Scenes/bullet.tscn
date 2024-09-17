@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://b61uoo1gu4src"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_bs8mw"]
+[ext_resource type="Texture2D" uid="uid://cb4p3fn1xdxhf" path="res://Assets/Sprites/bullet-Sheet.png" id="2_v84db"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d14e2"]
+radius = 8.24621
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v2fv8"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_tyws2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.232715), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ptxg7"]
+curve = SubResource("Curve_tyws2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ikepl"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_ptxg7")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmb46"]
+atlas = ExtResource("2_v84db")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u1sl"]
+atlas = ExtResource("2_v84db")
+region = Rect2(18, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fblt8"]
+atlas = ExtResource("2_v84db")
+region = Rect2(36, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ovim"]
+atlas = ExtResource("2_v84db")
+region = Rect2(54, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqvd4"]
+atlas = ExtResource("2_v84db")
+region = Rect2(72, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjas0"]
+atlas = ExtResource("2_v84db")
+region = Rect2(90, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k7mq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmb46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u1sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fblt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ovim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqvd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjas0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="bullet" type="CharacterBody2D"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_bs8mw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d14e2")
+
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node2D" groups=["bullets"]]
+modulate = Color(3, 3, 3, 1)
+material = SubResource("CanvasItemMaterial_v2fv8")
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_ikepl")
+texture = ExtResource("2_v84db")
+lifetime = 0.5
+randomness = 1.0
+
+[node name="sprite" type="AnimatedSprite2D" parent="Node2D"]
+sprite_frames = SubResource("SpriteFrames_k7mq8")
+autoplay = "default"
+frame_progress = 0.34278

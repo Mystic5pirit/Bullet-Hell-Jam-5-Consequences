@@ -1,0 +1,186 @@
+[gd_scene load_steps=19 format=3 uid="uid://bclcb6asanmk8"]
+
+[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="1_ks3lo"]
+[ext_resource type="Script" path="res://Scripts/bullet_shooter.gd" id="2_1uard"]
+[ext_resource type="Texture2D" uid="uid://deol803y857mo" path="res://Assets/Sprites/character_spaceship-Sheet.png" id="3_jlam2"]
+[ext_resource type="Script" path="res://Scripts/bullet_detector.gd" id="3_whjbk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oy32s"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="Curve" id="Curve_l01gh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.718875, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.243676), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xvqri"]
+curve = SubResource("Curve_l01gh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qva7f"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 28.98
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_xvqri")
+color = Color(1, 0.486275, 0, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.2
+turbulence_noise_strength = 7.81
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jkos"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(7, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3bv4"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(7, 64, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps8h6"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(103, 32, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxxet"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(135, 64, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jix3i"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(71, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26k4k"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(39, 96, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oon6r"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(71, 64, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic13p"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(39, 32, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sj8s"]
+atlas = ExtResource("3_jlam2")
+region = Rect2(135, 0, 18, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gsdeq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jkos")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3bv4")
+}],
+"loop": true,
+"name": &"five_sevenths",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps8h6")
+}],
+"loop": true,
+"name": &"four_sevenths",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxxet")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jix3i")
+}],
+"loop": true,
+"name": &"one_seventh",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26k4k")
+}],
+"loop": true,
+"name": &"over-overflowing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oon6r")
+}],
+"loop": true,
+"name": &"six_sevenths",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic13p")
+}],
+"loop": true,
+"name": &"three_sevenths",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sj8s")
+}],
+"loop": true,
+"name": &"two_sevents",
+"speed": 5.0
+}]
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(0, 18)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ks3lo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("CapsuleShape2D_oy32s")
+
+[node name="display" type="Node2D" parent="."]
+position = Vector2(0, -10)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="display"]
+modulate = Color(10, 10, 10, 1)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_qva7f")
+randomness = 1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="display"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_gsdeq")
+animation = &"full"
+autoplay = "full"
+
+[node name="bullet_shooter" type="Node2D" parent="display"]
+position = Vector2(0, -18)
+script = ExtResource("2_1uard")
+
+[node name="bullet_detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_whjbk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bullet_detector"]
+position = Vector2(0, -18)
+shape = SubResource("CapsuleShape2D_oy32s")
+
+[connection signal="body_entered" from="bullet_detector" to="bullet_detector" method="_on_body_entered"]

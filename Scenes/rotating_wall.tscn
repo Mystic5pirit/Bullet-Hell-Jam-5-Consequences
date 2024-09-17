@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://wykjvo2rmf05"]
+
+[ext_resource type="Script" path="res://Scripts/rotating_wall.gd" id="1_vfqvb"]
+
+[node name="rotating_wall" type="CharacterBody2D"]
+disable_mode = 1
+collision_mask = 0
+motion_mode = 1
+up_direction = Vector2(1, 0)
+script = ExtResource("1_vfqvb")
+
+[node name="Line2D" type="Line2D" parent="."]
+modulate = Color(2, 2, 2, 1)
+rotation = -1.5708
+points = PackedVector2Array(30, 0, 18.705, 23.455, -6.676, 29.248, -27.029, 13.017, -27.029, -13.017, -6.676, -29.248, 18.705, -23.455)
+closed = true
+width = 1.0
+default_color = Color(1, 0.5, 0, 1)
+
+[node name="wall1" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0
+
+[node name="wall2" type="CollisionPolygon2D" parent="."]
+rotation = 0.890118
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0
+
+[node name="wall3" type="CollisionPolygon2D" parent="."]
+rotation = 1.78024
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0
+
+[node name="wall4" type="CollisionPolygon2D" parent="."]
+rotation = 2.68781
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0
+
+[node name="wall5" type="CollisionPolygon2D" parent="."]
+rotation = 3.57792
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0
+
+[node name="wall6" type="CollisionPolygon2D" parent="."]
+rotation = 4.4855
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0
+
+[node name="wall7" type="CollisionPolygon2D" parent="."]
+rotation = 5.37561
+polygon = PackedVector2Array(17.355, 36.039, -17.355, 36.039, -13.017, 27.029, 13.039, 27.029)
+one_way_collision = true
+one_way_collision_margin = 6.0

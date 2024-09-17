@@ -1,0 +1,674 @@
+[gd_scene load_steps=32 format=3 uid="uid://ddwtv3oy4kper"]
+
+[ext_resource type="PackedScene" uid="uid://bclcb6asanmk8" path="res://Scenes/player.tscn" id="1_0lktq"]
+[ext_resource type="Script" path="res://Scripts/score.gd" id="1_4k5q2"]
+[ext_resource type="Texture2D" uid="uid://yuxxxhwfptuy" path="res://Assets/Sprites/Background_Stars.png" id="2_8v0h2"]
+[ext_resource type="PackedScene" uid="uid://wykjvo2rmf05" path="res://Scenes/rotating_wall.tscn" id="2_vew8g"]
+[ext_resource type="Texture2D" uid="uid://dlo2lp18o20lj" path="res://Assets/Sprites/background.png" id="4_gsaux"]
+[ext_resource type="PackedScene" uid="uid://brgfovir3qgml" path="res://Scenes/enemy_v2b.tscn" id="5_ddea8"]
+[ext_resource type="PackedScene" uid="uid://b8pbfix7si2pm" path="res://Scenes/enemy_v2p.tscn" id="5_o2108"]
+[ext_resource type="PackedScene" uid="uid://s1bgeipxdu15" path="res://Scenes/enemy_v2e.tscn" id="6_epj7v"]
+[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="6_if8ic"]
+[ext_resource type="Script" path="res://Scenes/tutorial.gd" id="7_b0618"]
+[ext_resource type="Texture2D" uid="uid://cb4p3fn1xdxhf" path="res://Assets/Sprites/bullet-Sheet.png" id="7_myxuk"]
+[ext_resource type="PackedScene" uid="uid://b61uoo1gu4src" path="res://Scenes/bullet.tscn" id="8_exqbf"]
+[ext_resource type="Texture2D" uid="uid://cctia6ods2hby" path="res://Assets/Sprites/keys-Sheet.png" id="13_y4ml5"]
+[ext_resource type="Texture2D" uid="uid://bb0efm1esll5f" path="res://Assets/Sprites/mouse.png" id="14_01sqo"]
+
+[sub_resource type="Environment" id="Environment_dncd0"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.2
+glow_bloom = 1.0
+glow_blend_mode = 0
+glow_hdr_threshold = 0.9
+fog_density = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ju4jl"]
+atlas = ExtResource("7_myxuk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk7kk"]
+atlas = ExtResource("7_myxuk")
+region = Rect2(36, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jom57"]
+atlas = ExtResource("7_myxuk")
+region = Rect2(18, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djc33"]
+atlas = ExtResource("7_myxuk")
+region = Rect2(54, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dqlw"]
+atlas = ExtResource("7_myxuk")
+region = Rect2(72, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_finm0"]
+atlas = ExtResource("7_myxuk")
+region = Rect2(90, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsent"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ju4jl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uk7kk")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jom57")
+}],
+"loop": true,
+"name": &"new_animation_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djc33")
+}],
+"loop": true,
+"name": &"new_animation_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dqlw")
+}],
+"loop": true,
+"name": &"new_animation_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_finm0")
+}],
+"loop": true,
+"name": &"new_animation_4",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtkku"]
+atlas = ExtResource("13_y4ml5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yubx7"]
+atlas = ExtResource("13_y4ml5")
+region = Rect2(34, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jmwr"]
+atlas = ExtResource("13_y4ml5")
+region = Rect2(68, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itiaj"]
+atlas = ExtResource("13_y4ml5")
+region = Rect2(102, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcrko"]
+atlas = ExtResource("13_y4ml5")
+region = Rect2(136, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pmt8q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtkku")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yubx7")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jmwr")
+}],
+"loop": true,
+"name": &"new_animation_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itiaj")
+}],
+"loop": true,
+"name": &"new_animation_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcrko")
+}],
+"loop": true,
+"name": &"new_animation_3",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1pms"]
+atlas = ExtResource("14_01sqo")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wjm6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1pms")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t4oiv"]
+font_size = 100
+
+[node name="game" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_4k5q2")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-512, -512)
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(256, 256)
+texture = ExtResource("4_gsaux")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(768, 256)
+texture = ExtResource("4_gsaux")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(256, 768)
+texture = ExtResource("4_gsaux")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(768, 768)
+texture = ExtResource("4_gsaux")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.25, 0.25, 0.25, 1)
+position = Vector2(-512, -512)
+motion_scale = Vector2(1.5, 1.5)
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(256, 256)
+rotation = 1.5708
+texture = ExtResource("2_8v0h2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(768, 256)
+rotation = 1.5708
+texture = ExtResource("2_8v0h2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(256, 768)
+rotation = 1.5708
+texture = ExtResource("2_8v0h2")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(768, 768)
+rotation = 1.5708
+texture = ExtResource("2_8v0h2")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(-512, -512)
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(256, 256)
+texture = ExtResource("2_8v0h2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(768, 256)
+texture = ExtResource("2_8v0h2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(256, 768)
+texture = ExtResource("2_8v0h2")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(768, 768)
+texture = ExtResource("2_8v0h2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dncd0")
+
+[node name="Player" parent="." instance=ExtResource("1_0lktq")]
+
+[node name="Rotating_Wall" parent="Player" instance=ExtResource("2_vew8g")]
+position = Vector2(0, -18)
+rotation = 0.907571
+scale = Vector2(4.815, 4.815)
+
+[node name="score" type="Label" parent="Player"]
+modulate = Color(2, 2, 2, 1)
+offset_left = -368.0
+offset_top = -221.0
+offset_right = -236.0
+offset_bottom = -191.0
+text = "SCORE: 0"
+
+[node name="timer" type="Label" parent="Player"]
+modulate = Color(2, 2, 2, 1)
+offset_left = 229.0
+offset_top = -219.0
+offset_right = 367.0
+offset_bottom = -196.0
+text = "TIME: 0.00"
+horizontal_alignment = 2
+
+[node name="enemy_spawner" type="Node2D" parent="Player"]
+script = ExtResource("6_if8ic")
+
+[node name="tutorial_holder" type="Node" parent="Player"]
+script = ExtResource("7_b0618")
+
+[node name="sub-tutorial_holder1" type="Node2D" parent="Player/tutorial_holder"]
+position = Vector2(0, -30)
+
+[node name="Line2D" type="Line2D" parent="Player/tutorial_holder/sub-tutorial_holder1"]
+points = PackedVector2Array(300, 150, 300, -150, -300, -150, -300, 150)
+closed = true
+default_color = Color(1, 0.501961, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-300, -150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_4"
+autoplay = "new_animation_2"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(300, -150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_1"
+autoplay = "new_animation_1"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(300, 150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-300, 150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "default"
+
+[node name="Polygon2D" type="Polygon2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D"]
+color = Color(1, 0.501961, 0, 0.129412)
+polygon = PackedVector2Array(300, 150, 300, -150, -300, -150, -300, 150)
+
+[node name="bullet1" parent="Player/tutorial_holder/sub-tutorial_holder1" instance=ExtResource("8_exqbf")]
+modulate = Color(0, 1.5, 0, 1)
+position = Vector2(-230, -75)
+
+[node name="Node2D" parent="Player/tutorial_holder/sub-tutorial_holder1/bullet1" index="1"]
+modulate = Color(1, 1, 1, 1)
+
+[node name="GPUParticles2D" parent="Player/tutorial_holder/sub-tutorial_holder1/bullet1/Node2D" index="0"]
+process_mode = 3
+
+[node name="bullet2" parent="Player/tutorial_holder/sub-tutorial_holder1" instance=ExtResource("8_exqbf")]
+modulate = Color(1.5, 0, 0, 1)
+position = Vector2(-230, 0)
+
+[node name="Node2D" parent="Player/tutorial_holder/sub-tutorial_holder1/bullet2" index="1"]
+modulate = Color(1, 1, 1, 1)
+
+[node name="GPUParticles2D" parent="Player/tutorial_holder/sub-tutorial_holder1/bullet2/Node2D" index="0"]
+process_mode = 3
+
+[node name="bullet3" parent="Player/tutorial_holder/sub-tutorial_holder1" instance=ExtResource("8_exqbf")]
+modulate = Color(0.753, 0, 0, 1)
+position = Vector2(-230, 75)
+
+[node name="Node2D" parent="Player/tutorial_holder/sub-tutorial_holder1/bullet3" index="1"]
+modulate = Color(1, 1, 1, 1)
+
+[node name="GPUParticles2D" parent="Player/tutorial_holder/sub-tutorial_holder1/bullet3/Node2D" index="0"]
+process_mode = 3
+
+[node name="enemy_v2b" parent="Player/tutorial_holder/sub-tutorial_holder1" instance=ExtResource("5_ddea8")]
+position = Vector2(230, 75)
+
+[node name="GPUParticles2D" parent="Player/tutorial_holder/sub-tutorial_holder1/enemy_v2b/display" index="0"]
+process_mode = 3
+
+[node name="enemy_v2e" parent="Player/tutorial_holder/sub-tutorial_holder1" instance=ExtResource("6_epj7v")]
+position = Vector2(230, 0)
+
+[node name="GPUParticles2D" parent="Player/tutorial_holder/sub-tutorial_holder1/enemy_v2e/display" index="0"]
+process_mode = 3
+
+[node name="enemy_v2p" parent="Player/tutorial_holder/sub-tutorial_holder1" instance=ExtResource("5_o2108")]
+position = Vector2(230, -75)
+
+[node name="GPUParticles2D" parent="Player/tutorial_holder/sub-tutorial_holder1/enemy_v2p/display" index="0"]
+process_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player/tutorial_holder/sub-tutorial_holder1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -137.0
+offset_right = 258.0
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = " BULLETS                                                                                          ENEMIES
+
+            Your Bullet                        Only Vulnerable to Your Bullet
+
+
+            Enemy Bullet              Only Vulnerably to Enemy Bullets
+            From You
+
+            Enemy Bullet
+            From Them             Vulnerable to Both Types of Bullets
+
+Bounce Off Your Shield's Inside        Are Not Blocked By Your Shield
+            "
+scroll_active = false
+
+[node name="Button" type="Button" parent="Player/tutorial_holder/sub-tutorial_holder1"]
+process_mode = 3
+modulate = Color(1, 0.501961, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = 150.0
+offset_right = 132.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "GOT IT!"
+flat = true
+
+[node name="Line2D2" type="Line2D" parent="Player/tutorial_holder/sub-tutorial_holder1"]
+position = Vector2(0, 183)
+rotation = 3.14159
+scale = Vector2(0.22, 0.22)
+points = PackedVector2Array(600, 150, 600, -150, -600, -150, -600, 150)
+closed = true
+default_color = Color(1, 0.501961, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-600, -150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_4"
+autoplay = "new_animation_2"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(600, -150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_1"
+autoplay = "new_animation_1"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(600, 150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-600, 150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "default"
+
+[node name="Polygon2D" type="Polygon2D" parent="Player/tutorial_holder/sub-tutorial_holder1/Line2D2"]
+color = Color(1, 0.501961, 0, 0.129412)
+polygon = PackedVector2Array(600, 150, 600, -150, -600, -150, -600, 150)
+
+[node name="sub-tutorial_holder2" type="Node2D" parent="Player/tutorial_holder"]
+position = Vector2(0, -30)
+
+[node name="Line2D" type="Line2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+points = PackedVector2Array(300, 150, 300, -150, -300, -150, -300, 150)
+closed = true
+default_color = Color(1, 0.501961, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-300, -150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_4"
+autoplay = "new_animation_2"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(300, -150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_1"
+autoplay = "new_animation_1"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(300, 150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-300, 150)
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "default"
+
+[node name="Polygon2D" type="Polygon2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D"]
+color = Color(1, 0.501961, 0, 0.129412)
+polygon = PackedVector2Array(300, 150, 300, -150, -300, -150, -300, 150)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -137.0
+offset_right = 258.0
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "          Move                                                                            Fire"
+scroll_active = false
+
+[node name="Button" type="Button" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+process_mode = 3
+modulate = Color(1, 0.501961, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = 150.0
+offset_right = 132.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "GOT IT!"
+flat = true
+
+[node name="Line2D2" type="Line2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(0, 183)
+rotation = 3.14159
+scale = Vector2(0.22, 0.22)
+points = PackedVector2Array(600, 150, 600, -150, -600, -150, -600, 150)
+closed = true
+default_color = Color(1, 0.501961, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-600, -150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_4"
+autoplay = "new_animation_2"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(600, -150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation_1"
+autoplay = "new_animation_1"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(600, 150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D2"]
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(-600, 150)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qsent")
+animation = &"new_animation"
+autoplay = "default"
+
+[node name="Polygon2D" type="Polygon2D" parent="Player/tutorial_holder/sub-tutorial_holder2/Line2D2"]
+color = Color(1, 0.501961, 0, 0.129412)
+polygon = PackedVector2Array(600, 150, 600, -150, -600, -150, -600, 150)
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-200, 25)
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-200, 60)
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+animation = &"new_animation_2"
+autoplay = "new_animation_2"
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-165, 60)
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+animation = &"new_animation_3"
+autoplay = "new_animation_3"
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-235, 60)
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+animation = &"new_animation_1"
+autoplay = "new_animation_1"
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(157, -2)
+scale = Vector2(4.25, 4.25)
+sprite_frames = SubResource("SpriteFrames_wjm6x")
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-200, -69)
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+autoplay = "default"
+
+[node name="AnimatedSprite2D11" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-200, -34)
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+autoplay = "default"
+
+[node name="AnimatedSprite2D12" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-165, -34)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+autoplay = "default"
+
+[node name="AnimatedSprite2D13" type="AnimatedSprite2D" parent="Player/tutorial_holder/sub-tutorial_holder2"]
+position = Vector2(-235, -34)
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_pmt8q")
+autoplay = "default"
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -18)
+zoom = Vector2(1.5, 1.5)
+
+[node name="Label" type="Label" parent="Player"]
+offset_left = -297.0
+offset_top = -160.0
+offset_right = 277.0
+offset_bottom = 117.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_t4oiv")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="game_over" from="Player/bullet_detector" to="." method="_on_bullet_detector_game_over"]
+[connection signal="finished_tutorial" from="Player/tutorial_holder" to="." method="_on_tutorial_holder_finished_tutorial"]
+[connection signal="button_up" from="Player/tutorial_holder/sub-tutorial_holder1/Button" to="Player/tutorial_holder" method="_on_button_button_up1"]
+[connection signal="button_up" from="Player/tutorial_holder/sub-tutorial_holder2/Button" to="Player/tutorial_holder" method="_on_button_button_up"]
+
+[editable path="Player"]
+[editable path="Player/tutorial_holder/sub-tutorial_holder1/bullet1"]
+[editable path="Player/tutorial_holder/sub-tutorial_holder1/bullet2"]
+[editable path="Player/tutorial_holder/sub-tutorial_holder1/bullet3"]
+[editable path="Player/tutorial_holder/sub-tutorial_holder1/enemy_v2b"]
+[editable path="Player/tutorial_holder/sub-tutorial_holder1/enemy_v2e"]
+[editable path="Player/tutorial_holder/sub-tutorial_holder1/enemy_v2p"]
